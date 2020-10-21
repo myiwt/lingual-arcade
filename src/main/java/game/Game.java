@@ -23,18 +23,6 @@ public abstract class Game {
     }
     
     /**
-     * Method used to start running a game (as prompted by user input in the CUI).
-     */
-    public abstract void runCUIGame();
-    
-    /**
-     * At the end of each Game, the final score is saved into the Scoreboard and it
-     * will be viewable to the user.
-     * @param score integer representing the Game final score
-     */
-    protected abstract void saveScoreForCUI(int score);
-    
-    /**
      * Returns the final score at the end of a Game.
      * @return Returns the final score at the end of a Game.
      */

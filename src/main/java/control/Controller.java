@@ -36,6 +36,10 @@ public class Controller implements ActionListener{
             model.changeView(actionCommand);
             quizGameModel.getNextQuestion();
         }
+        else if (actionCommand.equals("Scoreboard")) {
+            model.changeView(actionCommand);
+            model.updateScoreboard();
+        }
         else {
             model.changeView(actionCommand);
         }

@@ -65,7 +65,7 @@ public enum German implements Phrase {
     UPSTAIRS("OBEN","OH-BIN"),
     ZERO("NULL","NOOL"),
     ONE("EINS","AYNS"),
-    TWO("SWEI","TSVAY"),
+    TWO("ZWEI","TSVAY"),
     THREE("DREI","DRAY"),
     FOUR("VIER","FEER"),
     FIVE("FÜNF","FUENF"),

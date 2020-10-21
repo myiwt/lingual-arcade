@@ -15,7 +15,7 @@ import view.QuizGameView;
  *
  * @author Megan
  */
-public class QuizGameController implements ActionListener{
+public class QuizGameController implements ActionListener {
     QuizGameModel quizGameModel;
     QuizGameView quizGameView;
     Model model;
@@ -45,7 +45,6 @@ public class QuizGameController implements ActionListener{
             model.changeView("Main Menu");
             quizGameModel.setScore(0);
         }
-        
     }
     
 }

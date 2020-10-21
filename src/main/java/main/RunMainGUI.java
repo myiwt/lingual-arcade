@@ -10,6 +10,7 @@ import model.Model;
 import model.QuizGameModel;
 import view.MainView;
 import view.QuizGameView;
+import view.ScoreboardView;
 
 /**
  *
@@ -21,6 +22,7 @@ public class RunMainGUI {
     private static Controller mainController;
     private static QuizGameView quizGameView;
     private static QuizGameController quizGameController;
+    private static ScoreboardView scoreboardView;
     
     public RunMainGUI()  {
     }
@@ -29,13 +31,15 @@ public class RunMainGUI {
         // create instances of quiz model, view and controller
         QuizGameModel quizGameModel = new QuizGameModel();
         quizGameView = new QuizGameView();
+        scoreboardView = new ScoreboardView();
         quizGameController = new QuizGameController();
         // create instances of main model, view and controller
         mainModel = new Model();
-        mainView = new MainView(quizGameView);
+        mainView = new MainView(quizGameView, scoreboardView);
         mainController = new Controller();
         // pass the reference of model and view to the controller
         mainModel.addObserver(mainView);
+        mainModel.addObserver(scoreboardView);
         mainController.addModel(mainModel);
         mainController.addView(mainView);
         mainView.addController(mainController);

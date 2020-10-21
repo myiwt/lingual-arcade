@@ -20,13 +20,13 @@ public class MainView extends JPanel implements Observer {
     private final CardLayout cardLayout;
     private final JPanel mainPanel;
     
-    public MainView(QuizGameView quizView) {
+    public MainView(QuizGameView quizView, ScoreboardView scoreboardView) {
         super();
         mainPanel = new JPanel();
         cardLayout = new CardLayout();
         mainMenuView = new MainMenuView();
         gameInfoView = new GameInfoView();
-        scoreboardView = new ScoreboardView();
+        this.scoreboardView = scoreboardView;
         newGameView = new NewGameView();
         quizGameView = quizView;
         mainPanel.setLayout(cardLayout);
@@ -46,7 +46,8 @@ public class MainView extends JPanel implements Observer {
 
     @Override
     public void update(Observable obs, Object obj) {
-        cardLayout.show(mainPanel, (String) obj);
+        if (obj instanceof String)
+            cardLayout.show(mainPanel, (String) obj);
     }
     
     //What is the reason for NOT registering controllor in the constructor?

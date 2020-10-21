@@ -19,7 +19,6 @@ public class QuizGameModel extends Observable implements GameInterface {
     private MultiChoiceQuestion nextQuestion;
     private int questionCounter, maxQuestions;
     private int score;
-    private final String filePath = "customgame.txt";
     private String answerA, answerB, answerC, answerD;
     
 
@@ -58,7 +57,6 @@ public class QuizGameModel extends Observable implements GameInterface {
             String[] answers = new String[] {questionString, String.valueOf(questionCounter), answerA, answerB, answerC, answerD};
             setChanged();
             notifyObservers(answers);
-            
         }
         return reachedEnd;
     }

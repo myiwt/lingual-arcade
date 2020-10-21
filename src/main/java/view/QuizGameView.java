@@ -42,7 +42,7 @@ public class QuizGameView extends JPanel implements Observer {
         buttonC = new JButton();
         buttonD = new JButton();
         
-        Dimension buttonDimension = new Dimension(300,30);
+        Dimension buttonDimension = new Dimension(350,30);
         Dimension fillerDimension = new Dimension(5, 10); // filler space between components in the GUI
             
         multiChoiceButtons = new JButton[] {buttonA, buttonB, buttonC, buttonD};
