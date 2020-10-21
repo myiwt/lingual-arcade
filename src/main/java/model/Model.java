@@ -26,7 +26,6 @@ public class Model extends Observable {
     public static HashSet<Score> scoresSet;
     public static ArrayList<Score> scoresList;
     private Connection conn=null;
-    //private String url="jdbc:derby://localhost:1527/scoreboard;   create=true";  //url of the DB host
     private String url="jdbc:derby:scoreboard;create=true";  //url of the DB host
     private String username="pdc";
     private String password="pdc";

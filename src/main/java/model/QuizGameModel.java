@@ -26,9 +26,6 @@ public class QuizGameModel extends Observable implements GameInterface {
         this.score = 0;
         this.questionCounter = 0;
         this.questionSet = new QuestionSet();
-        this.questionSet.addLanguagePhrases("Spanish");
-        this.questionSet.addLanguagePhrases("German");
-        this.questionSet.addLanguagePhrases("French");
         setupGame();
     }
     
@@ -84,21 +81,8 @@ public class QuizGameModel extends Observable implements GameInterface {
     public void setScore(int score) {
         this.score = score;
     }
-
-    @Override
-    public boolean getInProgress() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setInProgress(boolean inProgress) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void saveScoreToDB(int score) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
-    
+    public QuestionSet getQuestionSet() {
+        return questionSet;
+    }
 }

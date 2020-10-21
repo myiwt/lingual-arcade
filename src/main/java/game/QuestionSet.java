@@ -255,4 +255,7 @@ public class QuestionSet {
         return multiChoiceQuestions;
     }
     
+    public List<Phrase> getAllPossibleTestPhrases() {
+        return allPossibleTestPhrases;
+    }
 }
