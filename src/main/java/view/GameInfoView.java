@@ -39,15 +39,15 @@ public class GameInfoView extends JPanel {
         add(mainMenuButton, BorderLayout.SOUTH);
     }
 
-    private final static String content = "This application contains two minigames: \n\n"
+    private final static String content = "This application contains three minigames: \n\n"
                 + "1) QUIZ GAME\n\n"
                 + "This is a game that helps you to learn basic phrases in different languages. The game is "
             + "a quiz with 20 questions and the user can select which languages to test. You can create a "
             + "custom quiz to focus your learning on selected phrases by providing a text file with the English phrases to choose the test questions.\n\n\n"
                         
-                + "2) CARD MATCHING GAME\n\n"
+                + "2) CARD MATCHING GAME - coming soon\n\n"
                 + "Match the foreign phrase to the English translations. The fewer matches made the higher the score. \n\n"
-            + "3) NZ SIGN LANGUAGE GAME\n\n"
+            + "3) NZ SIGN LANGUAGE GAME - coming soon\n\n"
                 + "Requires a webcam to play this game. You must sign as many letter as possible in 30 seconds."
                 + "For best results, ensure that you have a white background and that your hands are located within "
             + "the outlined box within the webcam view.\n\n";
