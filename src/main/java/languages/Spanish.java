@@ -5,15 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * COMP603: Program Design and Construction: Assessment 1
- * 1 September 2020
- * Semester 2 2020
- * 
  * Stores data for the Spanish phrases, their English translations and pronounciations.
  * These enum values are used to create Question objects which is used to define
  * the test questions and multiple-choice answers.
  * 
- * @author ghq8692 Megan Teh
+ * @author ghq8692
  */
 public enum Spanish implements Phrase {
     HELLO("HOLA","O-LA"),

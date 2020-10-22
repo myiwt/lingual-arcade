@@ -1,7 +1,10 @@
 package view;
 
 /**
- *
+ * This is a view class that follows the MVC (Model View Controller) design
+ * pattern. The GameInfoView class displays game instructions to provide users
+ * with game information and instructions.
+ * 
  * @author ghq8692 Megan Teh
  */
 

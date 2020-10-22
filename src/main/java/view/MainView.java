@@ -7,7 +7,17 @@ import java.util.Observer;
 import javax.swing.JPanel;
 
 /**
- *
+ * This is a view class that follows the MVC (Model View Controller) design
+ * pattern. The MainView holds multiple panels in a CardLayout layout to display:
+ * - The main menu screen
+ * - The game information description screen
+ * - The score history display screen
+ * - The new game selection screen
+ * - The quiz game screen
+ * 
+ * The MainView observes updates from the Model class to switch panels (screens),
+ * managed by the Controller class.
+ * 
  * @author ghq8692
  */
 public class MainView extends JPanel implements Observer {
@@ -20,14 +30,14 @@ public class MainView extends JPanel implements Observer {
     private final CardLayout cardLayout;
     private final JPanel mainPanel;
     
-    public MainView(QuizGameView quizView, ScoreboardView scoreboardView) {
+    public MainView(QuizGameView quizView, ScoreboardView scoreboardView, NewGameView newGameView) {
         super();
         mainPanel = new JPanel();
         cardLayout = new CardLayout();
         mainMenuView = new MainMenuView();
         gameInfoView = new GameInfoView();
         this.scoreboardView = scoreboardView;
-        newGameView = new NewGameView();
+        this.newGameView = newGameView;
         quizGameView = quizView;
         mainPanel.setLayout(cardLayout);
         initCardLayoutView();

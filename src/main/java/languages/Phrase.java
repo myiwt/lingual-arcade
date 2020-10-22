@@ -1,9 +1,6 @@
 package languages;
 
 /**
- * COMP603: Program Design and Construction: Assessment 1
- * 1 September 2020
- * Semester 2 2020
  * 
  * This interface contains methods to access the Phrase information for various
  * languages. 
@@ -12,7 +9,7 @@ package languages;
  * will need to declare these interface methods, as Enum classes by definition, 
  * are final, so they cannot inherit classes (but they can implement interfaces).
  * 
- * @author ghq8692 Megan Teh
+ * @author ghq8692
  */
 public interface Phrase {
     

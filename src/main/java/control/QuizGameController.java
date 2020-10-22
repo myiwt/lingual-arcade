@@ -1,23 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import javax.swing.JCheckBox;
 import model.Model;
 import model.QuizGameModel;
+import view.NewGameView;
 import view.QuizGameView;
 
 /**
- *
- * @author Megan
+ * This is a controller class that follows the MVC (Model View Controller) design
+ * pattern. This controller manages Quiz Games by handling user events in the 
+ * GUI in the QuizGameView class and by manipulating the Quiz data in the
+ * QuizGameModel class.
+ * 
+ * @author ghq8692
  */
-public class QuizGameController implements ActionListener {
+public class QuizGameController implements ActionListener, ItemListener {
     QuizGameModel quizGameModel;
     QuizGameView quizGameView;
+    NewGameView newGameView;
     Model model;
     
     public QuizGameController() {   
@@ -34,6 +38,10 @@ public class QuizGameController implements ActionListener {
     public void addView(QuizGameView view) {
         this.quizGameView = view;
     }
+    
+    public void addNewGameView(NewGameView view) {
+        this.newGameView = view;
+    }
             
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -46,5 +54,20 @@ public class QuizGameController implements ActionListener {
             quizGameModel.setScore(0);
         }
     }
-    
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        String checkboxName;
+        if (e.getSource() instanceof JCheckBox) {
+            JCheckBox checkbox = (JCheckBox) e.getSource();
+            checkboxName = checkbox.getName();
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                quizGameModel.addLanguage(checkboxName);
+            }
+            if (e.getStateChange() == ItemEvent.DESELECTED) {
+                quizGameModel.removeLanguage(checkboxName);
+            }
+        }
+        
+    }
 }

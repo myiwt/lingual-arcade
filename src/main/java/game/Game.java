@@ -3,14 +3,10 @@ package game;
 import java.util.Scanner;
 
 /**
- * COMP603: Program Design and Construction: Assessment 1
- * 1 September 2020
- * Semester 2 2020
- * 
  * Abstract class that defines a Game as having a score, a boolean flag to indicate
  * if the game is in progress or not and a Scanner (for user input).
  *
- * @author ghq8692 Megan Teh
+ * @author ghq8692
  */
 public abstract class Game {
     protected boolean inProgress;

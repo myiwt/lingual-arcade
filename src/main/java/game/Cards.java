@@ -4,17 +4,13 @@ import java.util.*;
 import languages.*;
 
 /**
- * COMP603: Program Design and Construction: Assessment 1
- * 1 September 2020
- * Semester 2 2020
- * 
  * The Cards object represents a group of Card objects that are used when playing
  * a CardMatchingGame. The Cards are laid out in rows and columns in the CUI and
  * the display shows which cards have already been matched and which ones have 
  * not been matched when playing a CardMatchingGame. This class also checks if 
  * two flipped Card objects are correct matches or not.
  * 
- * @author Megan Teh ghq8692
+ * @author ghq8692
  */
 public class Cards {
     

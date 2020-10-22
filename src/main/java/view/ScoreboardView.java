@@ -2,33 +2,32 @@ package view;
 
 
 /**
- *
- * @author ghq8692 Megan Teh
+ * This is a view class that follows the MVC (Model View Controller) design
+ * pattern. The ScoreboardView displays the score history which is sourced from an
+ * embedded Derby database. The ScoreboardView displays score information received
+ * from the Model class, and these updates are managed by the Controller class.
+ * 
+ * @author ghq8692
  */
 
 import control.Controller;
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import main.Scoreboard;
-import model.Score;
+import model.FinalScore;
 
 public class ScoreboardView extends JPanel implements Observer {
     private JLabel title;
     private JScrollPane scrollPane;
     private JTable scoreboardTable;
     private JButton mainMenuButton;
-    private ArrayList<String[]> scoreboardList;
     private String[][] data;
     private final String[] columns = new String[] {"DateTime", "Game Type", "Score"};
-    private ResultSet scoreboardResultSet;
     private ArrayList scoresList;
     private DefaultTableModel tableModel;
     
@@ -36,8 +35,6 @@ public class ScoreboardView extends JPanel implements Observer {
         super(new BorderLayout());
         title = new JLabel("Scoreboard", SwingConstants.CENTER);
         title.setFont(new Font("Dialog", Font.BOLD, 20));
-        
-        scoreboardList = Scoreboard.getScoreboardList();
         tableModel = new DefaultTableModel(columns,0);
         scoreboardTable = new JTable(tableModel);
         scoreboardTable.setDefaultEditor(Object.class, null);
@@ -62,21 +59,16 @@ public class ScoreboardView extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println(arg.getClass().getName());
         if (arg instanceof ArrayList) {
             tableModel.setRowCount(0);
-            scoresList = (ArrayList<Score>) arg;
-            System.out.println("size: " + scoresList.size());
+            scoresList = (ArrayList<FinalScore>) arg;
             Iterator scoresIter = scoresList.iterator();
             
             while (scoresIter.hasNext()) {
-                Score score = (Score) scoresIter.next();
+                FinalScore score = (FinalScore) scoresIter.next();
                 String[] row = new String[] {String.valueOf(score.getTimestamp()), score.getGameType(), 
                     String.valueOf(score.getScore())};
                 tableModel.addRow(row);
-                System.out.println(score.getTimestamp());
-                System.out.println(score.getGameType());
-                System.out.println(score.getScore());
             }
         }
     }

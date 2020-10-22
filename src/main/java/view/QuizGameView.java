@@ -10,8 +10,12 @@ import java.util.Observer;
 import javax.swing.*;
 
 /**
- *
- * @author ghq8692 Megan Teh
+ * This is a view class that follows the MVC (Model View Controller) design
+ * pattern. The QuizGameView displays a question for a quiz and the 4 multi-choice
+ * answers. It receives question information from the QuizGameModel class, which is
+ * managed by the QuizGameController class.
+ * 
+ * @author ghq8692
  */
 public class QuizGameView extends JPanel implements Observer {
     private JLabel title, questionText, questionNumber, scoreLabel;
@@ -46,7 +50,7 @@ public class QuizGameView extends JPanel implements Observer {
         Dimension fillerDimension = new Dimension(5, 10); // filler space between components in the GUI
             
         multiChoiceButtons = new JButton[] {buttonA, buttonB, buttonC, buttonD};
-        mainMenuButton = new JButton("Main Menu");
+        mainMenuButton = new JButton("Return to Main Menu");
         
         quizPanel.add(new Box.Filler(fillerDimension, fillerDimension, fillerDimension));
         quizPanel.add(new Box.Filler(fillerDimension, fillerDimension, fillerDimension));

@@ -1,7 +1,11 @@
 package view;
 
 /**
- *
+ * This is a view class that follows the MVC (Model View Controller) design
+ * pattern. The MainMenuView is the first screen displayed in the GUI and is used
+ * to navigate to other parts of the application. It contains the buttons: 
+ * New Game, Game Info, Scoreboard and Quit.
+ * 
  * @author ghq8692 Megan Teh
  */
 import control.Controller;

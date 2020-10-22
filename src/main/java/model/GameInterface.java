@@ -2,8 +2,8 @@ package model;
 
 
 /**
- * Interface for standard/custom quiz game, card game and vision detection game
- * to implement.
+ * Interface for create a game model class (e.g. quiz game or card game).
+ * 
  * @author ghq8692 Megan Teh
  */
 public interface GameInterface {

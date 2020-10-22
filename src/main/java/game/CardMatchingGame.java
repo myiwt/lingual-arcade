@@ -1,20 +1,15 @@
 package game;
 
-import java.util.HashMap;
+
 import java.util.Scanner;
-import main.Scoreboard;
 
 /**
- * COMP603: Program Design and Construction: Assessment 1
- * 1 September 2020
- * Semester 2 2020
- * 
  * A CardMatchingGame object is used to run a Card Matching Game in the application.
  * This class uses interactive input to manage the game. The user selects the cards 
  * to flip by entering input row/column grid locations of cards into the CUI. When 
  * a CardMatchingGame ends the score is saved into the ScoreBoard.
  * 
- * @author ghq8692 Megan Teh
+ * @author ghq8692
  */
 public class CardMatchingGame extends Game {
     private Cards cards;

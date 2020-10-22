@@ -2,42 +2,64 @@ package model;
 
 import game.MultiChoiceQuestion;
 import game.QuestionSet;
-import game.QuizGame;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 
 /**
- *
- * @author ghq8692 Megan Teh
+ * This is a model class that follows the MVC (Model View Controller) design
+ * pattern. A QuizGameModel holds data for a Quiz Game, which consists of
+ * the quiz multiple choice questions, current game score, question counter,
+ * languages selected for the quiz game and answer selection.
+ * 
+ * The QuizGameModel produces 20 random questions from a selection of languages
+ * as selected by the user in the GUI. This class also has a method to check if
+ * the user has given the correct answer to a question and increases the score
+ * accordingly.
+ * 
+ * @author ghq8692
  */
 public class QuizGameModel extends Observable implements GameInterface {
     
-    public static QuizGame quizGame;
     private QuestionSet questionSet;
     private Iterator mcqIter;
     private MultiChoiceQuestion nextQuestion;
     private int questionCounter, maxQuestions;
     private int score;
     private String answerA, answerB, answerC, answerD;
+    private ArrayList<String> languagesSelected;
     
 
     public QuizGameModel() {
         this.score = 0;
         this.questionCounter = 0;
         this.questionSet = new QuestionSet();
-        setupGame();
+        this.languagesSelected = new ArrayList<>();
+        languagesSelected.add("German");
+        languagesSelected.add("Spanish");
+        languagesSelected.add("French");
     }
     
-    private void setupGame() {
+    public void setupGame() {
+        this.score = 0;
+        this.questionCounter = 0;
+        for (String language: languagesSelected) {
+            this.questionSet.addLanguagePhrases(language);
+        }
         this.questionSet.generateQuestionSet();
         this.maxQuestions = questionSet.getMultiChoiceQuestions().size();
         List<MultiChoiceQuestion> multiChoiceQuestions = this.questionSet.getMultiChoiceQuestions();
         this.mcqIter = multiChoiceQuestions.iterator();
     }
     
+    public ArrayList<String> getLanguagesSelected() {
+        return this.languagesSelected;
+    }
+    
     public boolean getNextQuestion() {
         boolean reachedEnd = false;
+        score = 0;
         if (questionCounter >= maxQuestions) {
             reachedEnd = true;
             return reachedEnd;
@@ -54,6 +76,8 @@ public class QuizGameModel extends Observable implements GameInterface {
             String[] answers = new String[] {questionString, String.valueOf(questionCounter), answerA, answerB, answerC, answerD};
             setChanged();
             notifyObservers(answers);
+            notifyObservers(score);
+            notifyObservers(questionCounter);
         }
         return reachedEnd;
     }
@@ -64,6 +88,22 @@ public class QuizGameModel extends Observable implements GameInterface {
             setChanged();
             notifyObservers(score);
         } 
+    }
+    
+    public void addLanguage(String language) {
+        System.out.println("adding language " + language);
+        languagesSelected.add(language);
+    }
+    
+    public void removeLanguage(String language) {
+        System.out.println("removing language " + language);
+        languagesSelected.remove(language);
+    }
+    
+    public void resetQuizGame() {
+        this.score = 0;
+        this.questionSet = new QuestionSet();
+        this.questionCounter = 0;
     }
     
     @Override

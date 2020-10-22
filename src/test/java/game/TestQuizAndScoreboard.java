@@ -82,10 +82,10 @@ public class TestQuizAndScoreboard {
     @Test
     public void testUniqueQuizQuestions() {
         System.out.println("Testing all questions in a Quiz are unique");
-        HashSet<Question> uniqueQuestions = new HashSet<>();
+        HashSet<String> uniqueQuestions = new HashSet<>();
         for (MultiChoiceQuestion mcq: questionSet.getMultiChoiceQuestions()) {
             Question quizQuestion = mcq.getTestQuestion();
-            uniqueQuestions.add(quizQuestion);
+            uniqueQuestions.add(quizQuestion.toString());
         }
         assertEquals(uniqueQuestions.size(),20);
     }

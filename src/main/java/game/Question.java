@@ -3,15 +3,11 @@ package game;
 import languages.Phrase;
 
 /**
- * COMP603: Program Design and Construction: Assessment 1
- * 1 September 2020
- * Semester 2 2020
- * 
  * This class manages Question objects which contain a Phrase representing the
  * question/answer pair information. 4 Question objects make up a MultiChoiceQuestion
  * (with 1 'correct' answer and 3 'incorrect' answers).
  * 
- * @author ghq8692 Megan Teh
+ * @author ghq8692
  */
 public class Question {
     private Phrase phrase;

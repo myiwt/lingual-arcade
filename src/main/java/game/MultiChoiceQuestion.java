@@ -7,16 +7,12 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * COMP603: Program Design and Construction: Assessment 1
- * 1 September 2020
- * Semester 2 2020
- * 
  * MultiChoiceQuestion objects consist of one (correct) Question which represents
  * the test question, and three Questions representing the incorrect multi-choice
  * answers. MultiChoiceQuestions are used to build QuestionSets to make up the full
  * set of MultiChoiceQuestions that are used in a QuizGame.
  * 
- * @author ghq8692 Megan Teh
+ * @author ghq8692
  */
 public class MultiChoiceQuestion {
     private List<Question> questions;

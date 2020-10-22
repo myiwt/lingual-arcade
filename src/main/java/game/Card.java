@@ -1,17 +1,13 @@
 package game;
 
 /**
- * COMP603: Program Design and Construction: Assessment 1
- * 1 September 2020
- * Semester 2 2020
- * 
  * A Card is used to build a Cards object for a Card Matching Game. 
  * A Card contains the text representing what is written on a Card when it is 
  * flipped when playing a CardMatchingGame. A Card also contains a boolean 
  * indicating whether or not the Card has been matched whilst playing a
  * CardMatchingGame.
  * 
- * @author ghq8692 Megan Teh
+ * @author ghq8692
  */
 public class Card {
     

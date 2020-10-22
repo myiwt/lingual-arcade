@@ -6,10 +6,6 @@ import java.io.FileReader;
 import java.util.*;
 
 /**
- * COMP603: Program Design and Construction: Assessment 1
- * 1 September 2020
- * Semester 2 2020
- * 
  * QuestionSet objects consist of MultiChoiceQuestions that make up a Quiz
  * Game. 
  * 
@@ -20,7 +16,7 @@ import java.util.*;
  * 1) Language selection by user input OR
  * 2) Reading a text file containing a custom list of Phrases to test
  * 
- * @author ghq8692 Megan Teh
+ * @author ghq8692
  */
 public class QuestionSet {
     private List<MultiChoiceQuestion> multiChoiceQuestions;
@@ -35,7 +31,7 @@ public class QuestionSet {
         this.multiChoiceQuestions = new ArrayList<MultiChoiceQuestion>();
         allPossibleTestPhrases = new ArrayList<>();
         phraseBank = new ArrayList<>();
-        addAllPhrases();
+        //addAllPhrases();
     }
     
     /**
@@ -154,9 +150,6 @@ public class QuestionSet {
      * and multiple choice answers so that it is ready to be used for a QuizGame.
      */
     public void generateQuestionSet() {
-        addLanguagePhrases("french");
-        addLanguagePhrases("spanish");
-        addLanguagePhrases("german");
         generateTestQuestions();
         // For each test question, for each multiChoice set, randomly select the
         // 'incorrect' answers from all phrases (not limited to just the phrase bank)

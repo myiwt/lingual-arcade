@@ -1,19 +1,26 @@
 package view;
 
 import control.Controller;
+import control.QuizGameController;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 /**
- *
- * @author ghq8692 Megan Teh
+ * This is a view class that follows the MVC (Model View Controller) design
+ * pattern. The NewGameView class displays languages to select as check boxes so
+ * that the user can choose which languages to use to start a Quiz game. The 
+ * QuizGameController receives the language selection from the NewGameView and
+ * updates the QuizGameModel so that the correct languages are used to set up the
+ * quiz game.
+ * 
+ * @author ghq8692
  */
 public class NewGameView extends JPanel implements ItemListener {
     private JLabel title, selectLanguagesLabel;
     private JButton mainMenuButton, startGameButton;
-    private Checkbox standardGameCheckbox, customGameCheckbox, cardGameCheckBox;
+    private Checkbox cardGameCheckBox;
     private Checkbox[] gameOptions, quizOptions;
     private CheckboxGroup gameOptionsGroup, quizOptionsGroup;
     private JCheckBox[] languageCheckBoxes;
@@ -33,7 +40,8 @@ public class NewGameView extends JPanel implements ItemListener {
         gameOptionsGroup = new CheckboxGroup();
         gameOptions = new Checkbox[2];
         Checkbox quizCheckBox = new Checkbox("Language Quiz", gameOptionsGroup, true);
-        cardGameCheckBox = new Checkbox("Card Matching Game", gameOptionsGroup, false);
+        cardGameCheckBox = new Checkbox("Card Matching Game - new game coming soon!", gameOptionsGroup, false);
+        cardGameCheckBox.setEnabled(false);
         gameOptions[0] = quizCheckBox;
         gameOptions[1] = cardGameCheckBox;
         quizCheckBox.addItemListener(this);
@@ -49,14 +57,6 @@ public class NewGameView extends JPanel implements ItemListener {
         // Group the 2 quiz game options together so only one can be selected at a time within this group
         quizOptionsGroup = new CheckboxGroup(); 
         quizOptions = new Checkbox[2];
-        standardGameCheckbox = new Checkbox("Standard game", quizOptionsGroup, true);
-        customGameCheckbox = new Checkbox("Load game from file", quizOptionsGroup, false);
-        quizOptions[0] = standardGameCheckbox;
-        quizOptions[1] = customGameCheckbox;
-        standardGameCheckbox.addItemListener(this);
-        customGameCheckbox.addItemListener(this);
-        quizOptionsPanel.add(standardGameCheckbox);
-        quizOptionsPanel.add(customGameCheckbox);
         quizPanel.add(quizCheckBox);
         quizPanel.add(quizOptionsPanel);
         centerPanel.add(quizPanel);
@@ -119,19 +119,6 @@ public class NewGameView extends JPanel implements ItemListener {
         return startGameButton;
     }
     
-    // Helper function to set enabled language checkboxes for new game setup
-    private void setEnabledLanguageCheckBoxes(boolean enabled) {
-        selectLanguagesLabel.setEnabled(enabled);
-        for (JCheckBox cb: languageCheckBoxes) {
-                cb.setEnabled(enabled);
-            }
-    }
-    
-    private void setEnableQuizOptions(boolean enabled) {
-        standardGameCheckbox.setEnabled(enabled);
-            customGameCheckbox.setEnabled(enabled);
-    }
-    
     private boolean noLanguageSelected() {
         boolean noLanguageSelected = true;
         for (JCheckBox c: languageCheckBoxes) {
@@ -146,12 +133,13 @@ public class NewGameView extends JPanel implements ItemListener {
     public void addController(Controller controller) {
         startGameButton.addActionListener(controller);
         mainMenuButton.addActionListener(controller);
+        
     }
     
     /**
-     * Sets the conditions for game setup - make options available or grey them out according to
-     * whether game settings are valid or not. For a standard Quiz game or a card matching game,
-     * a game cannot be started unless a language is selected.
+     * Makes the start game button enabled or greyed out according to whether 
+     * the game settings are valid or not. Cannot start a game unless at least
+     * one language is selected.
      * @param e 
      */
     @Override
@@ -164,47 +152,20 @@ public class NewGameView extends JPanel implements ItemListener {
         } else {
             checkboxName = String.valueOf(e.getItem());
         }
-        if (checkboxName.equals("Load game from file")) {
-            setEnabledLanguageCheckBoxes(false);
-            startGameButton.setEnabled(true);
-        } else if (checkboxName.equals("Card Matching Game")) {
-            setEnableQuizOptions(false);
-            setEnabledLanguageCheckBoxes(true);
-        } else if (checkboxName.equals("Language Quiz")) {
-            if (customGameCheckbox.isEnabled()) {
-                setEnabledLanguageCheckBoxes(false);
-            }
-            setEnableQuizOptions(true);
-        } else {
-            setEnabledLanguageCheckBoxes(true);
-        }
 
         if (noLanguageSelected()) {
-            if (standardGameCheckbox.isEnabled() && standardGameCheckbox.getState()) {
-                startGameButton.setEnabled(false);
-                startGameButton.setActionCommand("Quiz Game");
-            } 
-            else if (customGameCheckbox.isEnabled() && customGameCheckbox.getState()) {
-                startGameButton.setEnabled(true);
-                startGameButton.setActionCommand("Quiz Game");
-            }
-            else if (cardGameCheckBox.isEnabled() && cardGameCheckBox.getState()) {
-                startGameButton.setEnabled(false);
-                startGameButton.setActionCommand("Card Matching Game");
-            }
-        } else {
-            if (standardGameCheckbox.isEnabled() && standardGameCheckbox.getState()) {
-                startGameButton.setEnabled(true);
-                startGameButton.setActionCommand("Quiz Game");
-            } 
-            else if (customGameCheckbox.isEnabled() && customGameCheckbox.getState()) {
-                startGameButton.setEnabled(true);
-                startGameButton.setActionCommand("Quiz Game");
-            }
-            else if (cardGameCheckBox.isEnabled() && cardGameCheckBox.getState()) {
-                startGameButton.setEnabled(true);
-                startGameButton.setActionCommand("Card Matching Game");
-            }
+            startGameButton.setEnabled(false);
+        }
+        
+        if (!noLanguageSelected()) {
+            startGameButton.setEnabled(true);
         }
     }
+    
+    public void addQuizGameController(QuizGameController controller) {
+        for (JCheckBox cb: languageCheckBoxes) {
+                cb.addItemListener(controller);
+            }
+    }
+
 }

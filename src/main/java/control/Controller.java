@@ -7,10 +7,14 @@ import model.QuizGameModel;
 import view.MainView;
 
 /**
- *
- * @author ghq8692 Megan Teh
+ * This is a controller class that follows the MVC (Model View Controller) design
+ * pattern. This controller manages the GUI by handling user events in the 
+ * MainView class by manipulating the data in the Model class. This class handles 
+ * the updating and setup of Model data and handles the GUI view updates.
+ * 
+ * @author ghq8692
  */
-public class Controller implements ActionListener{
+public class Controller implements ActionListener {
     Model model;
     MainView view;
     QuizGameModel quizGameModel;
@@ -29,16 +33,22 @@ public class Controller implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         String actionCommand = e.getActionCommand();
+        System.out.println(actionCommand);
         if (actionCommand.equals("Quit")) {
             System.exit(0);
         }
         else if (actionCommand.equals("Quiz Game")) {
             model.changeView(actionCommand);
+            quizGameModel.setupGame();
             quizGameModel.getNextQuestion();
         }
         else if (actionCommand.equals("Scoreboard")) {
             model.changeView(actionCommand);
             model.updateScoreboard();
+        }
+        else if (actionCommand.equals("Return to Main Menu")) {
+            model.changeView("Main Menu");
+            quizGameModel.resetQuizGame();
         }
         else {
             model.changeView(actionCommand);
@@ -48,6 +58,4 @@ public class Controller implements ActionListener{
     public void addView(MainView view) {
         this.view = view;
     }
-
-    
 }
