@@ -33,7 +33,7 @@ public class Question {
     
     /**
      * Returns a String representation of the question and is used for display in
-     * the CUI when a Game is running.
+     * the GUI when a Quiz Game is running.
      * @return Returns a String representation of the question and is used for
      * display in the CUI when a Game is running.
      */

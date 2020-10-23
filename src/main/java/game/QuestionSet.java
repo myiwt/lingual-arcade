@@ -31,7 +31,6 @@ public class QuestionSet {
         this.multiChoiceQuestions = new ArrayList<MultiChoiceQuestion>();
         allPossibleTestPhrases = new ArrayList<>();
         phraseBank = new ArrayList<>();
-        //addAllPhrases();
     }
     
     /**
@@ -45,87 +44,6 @@ public class QuestionSet {
         phraseBank.addAll(Arrays.asList(German.values()));
     }
 
-    /**
-     * Reads a text file to derive a custom list of Phrases that are used to create
-     * the questions that will be tested in the QuestionSet.
-     * 
-     * The text file must contain one phrase per line, with the Enum value first 
-     * then the language, separated by comma. This method will handle incorrectly
-     * formatted data in the text file.
-     * @param filePath The file path to the text file input in a String format.
-     */
-    public void setPhrasesFromFile(String filePath) {
-        
-        HashSet<Phrase> phraseSet = new HashSet<>();
-        
-        try {
-            scanReader = new Scanner(new FileReader(filePath));
-            while (scanReader.hasNextLine()) {
-                String fileLineStr = scanReader.nextLine().toUpperCase();
-                String[] fileLineArr = fileLineStr.split(",[ ]*");
-                String className = "";
-                try {
-                    className = fileLineArr[1];
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    continue; // Line is not comma delimited so it is invalid - skip to next line
-                }
-                
-                if (isClass(className)) {
-                    String foreignPhrase = fileLineArr[0];
-                    if (className.equalsIgnoreCase("SPANISH")) {   
-                        try {
-                            if (phraseBank.contains(Spanish.valueOf(foreignPhrase))) {
-                                phraseSet.add(Spanish.valueOf(foreignPhrase));
-                            }
-                        } catch (IllegalArgumentException e) {
-                            // Invalid phrase, do nothing, do not add to phrase bank
-                        }
-                    }
-                    else if (className.equalsIgnoreCase("FRENCH")) {   
-                        try {
-                            if (phraseBank.contains(French.valueOf(foreignPhrase))) {
-                                phraseSet.add(French.valueOf(foreignPhrase));
-                            }
-                        } catch (IllegalArgumentException e) {
-                            // Invalid phrase, do nothing, do not add to phrase bank
-                        }
-                    }
-                    else if (className.equalsIgnoreCase("GERMAN")) {   
-                        try {
-                            if (phraseBank.contains(German.valueOf(foreignPhrase))) {
-                                phraseSet.add(German.valueOf(foreignPhrase));
-                            }
-                        } catch (IllegalArgumentException e) {
-                            // Invalid phrase, do nothing, do not add to phrase bank
-                        }
-                    }
-                }
-            }
-            // The phraseBank contains a list of unique Phrases
-            this.allPossibleTestPhrases.addAll(phraseSet);
-        } catch (FileNotFoundException e) {
-            System.err.println("Error: check local file path: " + e);
-        } finally {
-            scanReader.close();
-        }
-    }
-    
-    /**
-     * Helper function used to determine whether or not an input String is a valid
-     * language available in this application.
-     * @param className A String input representing a language class name
-     * @return Returns true if the language does exist in the language package and 
-     * false if it does not.
-     */
-    private boolean isClass(String className) {
-        try {
-            Class.forName("languages." + className.substring(0,1).toUpperCase()+className.substring(1).toLowerCase());
-            return true;
-        } catch (ClassNotFoundException e) {
-            return false;
-        }
-    }
-    
     /**
      * Adds Phrases by language to include in the random selection of test questions
      * in the QuestionSet. This is used when the user plays a standard QuizGame 
@@ -217,26 +135,6 @@ public class QuestionSet {
         // Sets boolean variable true to represent that this it the correct question-answer pair
         multiChoiceQuestion.addQuestion(new Question(testPhrase, true));
         return multiChoiceQuestion;
-    }
-    
-    /**
-     * Returns a list of Strings which represent the printed form of all MultiChoiceQuestions
-     * in a QuestionSet. This is used for display in the CUI when running a QuizGame. Each
-     * String element in the list displays both the question and multi-choice answers for
-     * one MultiChoiceQuestion object.
-     * 
-     * @return A List of String values represent the printed form of all MultiChoiceQuestions
-     * in a QuestionSet. This is used for display in the CUI when running a Game. Each
-     * String element in the list displays the question and multi-choice answers for
-     * one MultiChoiceQuestion object.
-     */
-    public List<String> generateQuestionSetDisplay() {
-        List<String> questionStringList = new ArrayList<>();
-        
-        this.multiChoiceQuestions.forEach((m) -> {
-            questionStringList.add(m.printQuestion()+"\n"+m.printAnswers());
-        });
-        return questionStringList;
     }
     
     /**

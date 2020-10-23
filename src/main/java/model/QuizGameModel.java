@@ -20,7 +20,7 @@ import java.util.Observable;
  * 
  * @author ghq8692
  */
-public class QuizGameModel extends Observable implements GameInterface {
+public class QuizGameModel extends Observable {
     
     private QuestionSet questionSet;
     private Iterator mcqIter;
@@ -119,19 +119,11 @@ public class QuizGameModel extends Observable implements GameInterface {
         this.questionCounter = 1;
         updateScoreAndQuestionCounter();
     }
-    
-    @Override
-    public void runGame() {
-        setupGame();
-        getNextQuestion();
-    }
 
-    @Override
     public int getScore() {
         return this.score;
     }
 
-    @Override
     public void setScore(int score) {
         this.score = score;
     }

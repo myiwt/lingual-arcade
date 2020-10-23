@@ -32,52 +32,15 @@ public class MultiChoiceQuestion {
         allPhrases.addAll(French.getAllPhrases());
         allPhrases.addAll(German.getAllPhrases());
     }
-    
-    /**
-     * Returns the text representation of the MultiChoiceQuestion for displaying
-     * in the CUI.
-     * @return The String format representation of the question and multi-choice
-     * answers.
-     */
-    public String MultiChoiceToString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.printQuestion());
-        sb.append("\n");
-        sb.append(this.printAnswers());
-        return sb.toString();
-    }
-    
+
     /**
      * Returns the text representation of the test question for a MultiChoiceQuestion.
-     * Used to display the test question in the CUI when running a QuizGame.
+     * Used to display the test question when running a QuizGame.
      * @return The String format representation of the test question of a 
      * MultiChoiceQuestion object.
      */
     public String printQuestion() {
         return this.testQuestion.toString();
-    }
-    
-    /**
-     * Returns the text representation of the multiple choice answers in a 
-     * MultiChoiceQuestion. Used to display the answers in the CUI when a QuizGame is
-     * run. Each multiple-choice answer is labelled alphabetically and the correct
-     * answer is stored into the correctAnswerChar attribute for this MultiChoiceQuestion 
-     * object.
-     * @return The String format representation of the multiple choice answers for a 
-     * MultiChoiceQuestion object.
-     */
-    public String printAnswers() {
-        String answers = "";
-        int choice = 65;
-        for (Question q: this.questions) {
-            String choiceChar = String.valueOf((char) choice);
-            answers += choiceChar +") " + q.getPhrase().getForeignPhrase() +"\n";
-            if (q.getIsTestQuestion()) {
-                this.correctAnswerChar = choiceChar;
-            }
-            choice++;
-        }
-        return answers;
     }
     
     /**
