@@ -39,7 +39,9 @@ public class Question {
      */
     @Override
     public String toString() {
-        String questionMessage = String.format("<html>How do you say this in %s? <br/>\"%s\"</html>", 
+        //String questionMessage = String.format("<html>How do you say this in %s? <br/>\"%s\"</html>", 
+        //        this.phrase.getClass().getSimpleName(),this.getPhrase());
+        String questionMessage = String.format("How do you say this in %s? \"%s\"", 
                 this.phrase.getClass().getSimpleName(),this.getPhrase());
         return questionMessage;
     }

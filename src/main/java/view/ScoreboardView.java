@@ -26,7 +26,6 @@ public class ScoreboardView extends JPanel implements Observer {
     private JScrollPane scrollPane;
     private JTable scoreboardTable;
     private JButton mainMenuButton;
-    private String[][] data;
     private final String[] columns = new String[] {"DateTime", "Game Type", "Score"};
     private ArrayList scoresList;
     private DefaultTableModel tableModel;
@@ -49,7 +48,6 @@ public class ScoreboardView extends JPanel implements Observer {
     }
     
     public void addController(Controller controller) {
-        //need a controller before adding it as a listener 
         mainMenuButton.addActionListener(controller);
     }
     
@@ -63,7 +61,6 @@ public class ScoreboardView extends JPanel implements Observer {
             tableModel.setRowCount(0);
             scoresList = (ArrayList<FinalScore>) arg;
             Iterator scoresIter = scoresList.iterator();
-            
             while (scoresIter.hasNext()) {
                 FinalScore score = (FinalScore) scoresIter.next();
                 String[] row = new String[] {String.valueOf(score.getTimestamp()), score.getGameType(), 

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Observable;
 import java.util.logging.Level;
@@ -40,7 +41,6 @@ public class Model extends Observable {
         connectToDB();
         scoresSet = new HashSet<FinalScore>();
         scoresList = new ArrayList<FinalScore>();
-        updateScoreboard();
     }
     
     public void connectToDB() {
@@ -64,6 +64,8 @@ public class Model extends Observable {
     }
     
     public void updateScoreboard() {
+        scoresSet = new HashSet<FinalScore>();
+        scoresList = new ArrayList<FinalScore>();
         try {
             ResultSet rs = SQLstatement.executeQuery("SELECT * FROM SCOREBOARD order by DateTime");
             while (rs.next()) {
@@ -73,6 +75,7 @@ public class Model extends Observable {
                 scoresSet.add(new FinalScore(timestamp, score, gameType));
             }
             scoresList.addAll(scoresSet);
+            Collections.sort(scoresList);
             setChanged();
             notifyObservers(scoresList);
         } catch (SQLException ex) {

@@ -33,7 +33,6 @@ public class Controller implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String actionCommand = e.getActionCommand();
-        System.out.println(actionCommand);
         if (actionCommand.equals("Quit")) {
             System.exit(0);
         }
@@ -47,6 +46,13 @@ public class Controller implements ActionListener {
             model.updateScoreboard();
         }
         else if (actionCommand.equals("Return to Main Menu")) {
+            quizGameModel.openQuitQuizDialog();
+        }
+        else if (actionCommand.equals("Continue quiz")) {
+            quizGameModel.continueQuiz();
+        }
+        else if (actionCommand.equals("Quit to Main Menu")) {
+            quizGameModel.stopQuiz();
             model.changeView("Main Menu");
             quizGameModel.resetQuizGame();
         }

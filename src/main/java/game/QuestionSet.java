@@ -189,6 +189,7 @@ public class QuestionSet {
         // If the phraseBank has greater than 20 Phrases then only 20 Phrases will be
         // randomly selected from the phraseBank
         int questionCounter = 0;
+        this.multiChoiceQuestions = new ArrayList<MultiChoiceQuestion>();
         while (questionCounter < nQuestions ) {
             for (Phrase phrase: this.allPossibleTestPhrases) {
                 MultiChoiceQuestion multiChoiceQuestion = this.generateNewMultiChoiceQ(phrase);

@@ -35,11 +35,23 @@ public class FinalScore implements Comparable<FinalScore> {
     public String getGameType() {
         return gameType;
     }
-
+    
+    // Sort scores by timestamp in descending order, so that they display from 
+    // the latest to earliest timestamp when viewing the Scoreboard in the GUI.
     @Override
     public int compareTo(FinalScore o) {
-        return this.timestamp.compareTo(o.getTimestamp());
+        return this.timestamp.compareTo(o.getTimestamp())*-1;
     }
     
-    
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof FinalScore) {
+            FinalScore fso = (FinalScore) o;
+            if (fso.gameType.equals(this.gameType) && fso.score == this.score && 
+                    fso.timestamp.equals(this.timestamp)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

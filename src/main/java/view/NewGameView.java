@@ -51,14 +51,10 @@ public class NewGameView extends JPanel implements ItemListener {
         JPanel quizPanel = new JPanel();
         quizPanel.setLayout(new BoxLayout(quizPanel, BoxLayout.Y_AXIS));
         
-        // Inner panel to display language quiz game options 
-        JPanel quizOptionsPanel = new JPanel();
-        
         // Group the 2 quiz game options together so only one can be selected at a time within this group
         quizOptionsGroup = new CheckboxGroup(); 
         quizOptions = new Checkbox[2];
         quizPanel.add(quizCheckBox);
-        quizPanel.add(quizOptionsPanel);
         centerPanel.add(quizPanel);
         
         // Add option to select card matching game
@@ -133,7 +129,6 @@ public class NewGameView extends JPanel implements ItemListener {
     public void addController(Controller controller) {
         startGameButton.addActionListener(controller);
         mainMenuButton.addActionListener(controller);
-        
     }
     
     /**
@@ -144,15 +139,6 @@ public class NewGameView extends JPanel implements ItemListener {
      */
     @Override
     public void itemStateChanged(ItemEvent e) {
-        String checkboxName;
-        
-        if (e.getSource() instanceof JCheckBox) {
-            JCheckBox checkbox = (JCheckBox) e.getSource();
-            checkboxName = checkbox.getName();
-        } else {
-            checkboxName = String.valueOf(e.getItem());
-        }
-
         if (noLanguageSelected()) {
             startGameButton.setEnabled(false);
         }
@@ -165,7 +151,6 @@ public class NewGameView extends JPanel implements ItemListener {
     public void addQuizGameController(QuizGameController controller) {
         for (JCheckBox cb: languageCheckBoxes) {
                 cb.addItemListener(controller);
-            }
+        }
     }
-
 }

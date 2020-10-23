@@ -47,7 +47,9 @@ public class QuizGameController implements ActionListener, ItemListener {
     public void actionPerformed(ActionEvent e) {
         String answerChar = e.getActionCommand().substring(0, 1);
         quizGameModel.checkAnswer(answerChar);
-        if (quizGameModel.getNextQuestion()) {
+        boolean quizCompleted = quizGameModel.getNextQuestion();
+        
+        if (quizCompleted) {
             model.saveScoreToDB(quizGameModel.getScore(), "Quiz Game");
             quizGameView.showResult();
             model.changeView("Main Menu");
@@ -68,6 +70,5 @@ public class QuizGameController implements ActionListener, ItemListener {
                 quizGameModel.removeLanguage(checkboxName);
             }
         }
-        
     }
 }

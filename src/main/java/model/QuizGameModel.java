@@ -29,11 +29,12 @@ public class QuizGameModel extends Observable implements GameInterface {
     private int score;
     private String answerA, answerB, answerC, answerD;
     private ArrayList<String> languagesSelected;
+    private boolean runQuiz = true;
     
 
     public QuizGameModel() {
         this.score = 0;
-        this.questionCounter = 0;
+        this.questionCounter = 1;
         this.questionSet = new QuestionSet();
         this.languagesSelected = new ArrayList<>();
         languagesSelected.add("German");
@@ -42,8 +43,6 @@ public class QuizGameModel extends Observable implements GameInterface {
     }
     
     public void setupGame() {
-        this.score = 0;
-        this.questionCounter = 0;
         for (String language: languagesSelected) {
             this.questionSet.addLanguagePhrases(language);
         }
@@ -57,9 +56,24 @@ public class QuizGameModel extends Observable implements GameInterface {
         return this.languagesSelected;
     }
     
+    public void stopQuiz() {
+        runQuiz = false;
+        setChanged();
+        notifyObservers("Quit to Main Menu");
+    }
+    
+    public void continueQuiz() {
+        setChanged();
+        notifyObservers("Continue quiz");
+    }
+    
+    public void openQuitQuizDialog() {
+        setChanged();
+        notifyObservers("Open quit quiz dialog");
+    }
+    
     public boolean getNextQuestion() {
         boolean reachedEnd = false;
-        score = 0;
         if (questionCounter >= maxQuestions) {
             reachedEnd = true;
             return reachedEnd;
@@ -68,7 +82,6 @@ public class QuizGameModel extends Observable implements GameInterface {
         if (this.mcqIter.hasNext()) {
             nextQuestion = (MultiChoiceQuestion) this.mcqIter.next();
             String questionString = nextQuestion.getTestQuestion().toString();
-            questionCounter++;
             answerA = "A: " + nextQuestion.getQuestions().get(0).getPhrase().getForeignPhrase();
             answerB = "B: " + nextQuestion.getQuestions().get(1).getPhrase().getForeignPhrase();
             answerC = "C: " + nextQuestion.getQuestions().get(2).getPhrase().getForeignPhrase();
@@ -76,34 +89,37 @@ public class QuizGameModel extends Observable implements GameInterface {
             String[] answers = new String[] {questionString, String.valueOf(questionCounter), answerA, answerB, answerC, answerD};
             setChanged();
             notifyObservers(answers);
-            notifyObservers(score);
-            notifyObservers(questionCounter);
         }
         return reachedEnd;
     }
     
     public void checkAnswer(String answer) {
+        questionCounter++;
         if (answer.equalsIgnoreCase(nextQuestion.getCorrectAnswerChar())) {
             score++;
-            setChanged();
-            notifyObservers(score);
+            updateScoreAndQuestionCounter();
         } 
     }
     
+    private void updateScoreAndQuestionCounter() {
+        int[] scoreAndQuestionCounter = {score, questionCounter};
+        setChanged();
+        notifyObservers(scoreAndQuestionCounter);
+    }
+    
     public void addLanguage(String language) {
-        System.out.println("adding language " + language);
         languagesSelected.add(language);
     }
     
     public void removeLanguage(String language) {
-        System.out.println("removing language " + language);
         languagesSelected.remove(language);
     }
     
     public void resetQuizGame() {
         this.score = 0;
         this.questionSet = new QuestionSet();
-        this.questionCounter = 0;
+        this.questionCounter = 1;
+        updateScoreAndQuestionCounter();
     }
     
     @Override
