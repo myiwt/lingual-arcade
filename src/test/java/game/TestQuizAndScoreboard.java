@@ -36,6 +36,7 @@ public class TestQuizAndScoreboard {
     @Before
     public void setUp() {
         this.quizGameModel = new QuizGameModel();
+        this.quizGameModel.setupGame();
         this.questionSet = this.quizGameModel.getQuestionSet();
         allPossibleTestPhrases = this.questionSet.getAllPossibleTestPhrases();
         try {
