@@ -29,7 +29,6 @@ public class QuizGameModel extends Observable implements GameInterface {
     private int score;
     private String answerA, answerB, answerC, answerD;
     private ArrayList<String> languagesSelected;
-    private boolean runQuiz = true;
     
 
     public QuizGameModel() {
@@ -57,7 +56,6 @@ public class QuizGameModel extends Observable implements GameInterface {
     }
     
     public void stopQuiz() {
-        runQuiz = false;
         setChanged();
         notifyObservers("Quit to Main Menu");
     }

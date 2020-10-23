@@ -53,7 +53,7 @@ public class QuizGameController implements ActionListener, ItemListener {
             model.saveScoreToDB(quizGameModel.getScore(), "Quiz Game");
             quizGameView.showResult();
             model.changeView("Main Menu");
-            quizGameModel.setScore(0);
+            quizGameModel.resetQuizGame();
         }
     }
 
