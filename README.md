@@ -12,7 +12,7 @@ This is an application that helps people to learn some simple phrases from diffe
 - New Zealand Sign Language
 
 ## Details
-This application has given me the chance to learn how to write an application in Java using the MVC design pattern. The Vision Detection game uses OpenCV to detect the sign gestures from a webcam and DeepLearning4j is used to detect gestures. This application uses the Hibernate Framework for database management and it also includes unit tests.
+This application has given me the chance to learn how to write an application in Java. It is built using Maven and follows the MVC framework using the observer-observable design pattern. The Vision Detection game uses OpenCV to detect the sign gestures from a webcam and DeepLearning4j is used to detect gestures. This application uses the Hibernate Framework for database management and it also includes unit tests.
 
 ### Demo
 
